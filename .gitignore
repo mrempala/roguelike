@@ -28,4 +28,6 @@
 *.app
 
 # Temporary
-*~
+*.cpp~
+*.h~
+*.txt~

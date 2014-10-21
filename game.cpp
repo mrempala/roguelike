@@ -14,7 +14,8 @@ const char KB_RIGHT = 'd';
 const char KB_UP = 'w';
 const char KB_DOWN = 's';
 
-//Note, check for bounds when setting
+
+//Class implementation
 game::game(int gobNum){
     //Intialize random seed
     srand (time(NULL));
