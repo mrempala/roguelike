@@ -24,7 +24,7 @@ class goblin {
       void setY(int a){y = a;}
       int getX(){return x;}
       int getY(){return y;}
-      void moveRandomly();
+      //void moveRandomly();
       
    private:
       int x;
@@ -37,7 +37,6 @@ class game {
       ~game();
       bool readMapFile(char *mapFileName);
       void printGame();
-      //void printMenu();
       bool validMove(int x, int y);
       //bool isWall(int x, int y);
       bool goblinCollison();
