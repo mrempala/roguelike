@@ -14,6 +14,8 @@ class player {
       //void printPlayer();
       
    private:
+      bool alive; //not used
+      int health; //not used
       int x;
       int y;
 };
@@ -27,6 +29,7 @@ class goblin {
       //void moveRandomly();
       
    private:
+      int health; //not used
       int x;
       int y;
 };
