@@ -24,7 +24,7 @@ class goblin {
       void setY(int a){y = a;}
       int getX(){return x;}
       int getY(){return y;}
-      void moveRandomly();
+      //void moveRandomly();
       
    private:
       int x;
