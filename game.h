@@ -19,16 +19,15 @@ class game {
    public:
       game();
       ~game();
+      int setGobNum(int a){numGoblins = a;}
       bool readTerrainFile(const char *mapFileName);
+      void spawnGoblins();
       void clearScreen();
       void printDeath();
       void printGame();
-      bool validMove(int x, int y);
+      bool validMove(int x, int y)const;
       //bool isWall(int x, int y);
       bool goblinCollison();
-      void movePlayer(char input);
-      void moveGoblinRandomly(goblin &aGoblin);
-      void spawnGoblins();
       void play();
    
    private:
@@ -38,7 +37,8 @@ class game {
       player player1;
       int numGoblins;
       std::vector<goblin> goblinVec;
-      //std::Vector<enemy> enemy 
+      //Idea: Keep two seperate class that keeps track of items
+      //and enemies. Reports back if there is an enemy/item in that location.
 };
 
 #endif

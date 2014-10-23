@@ -9,6 +9,7 @@ int main(int argc,char *argv[]){
     tcsetattr(STDIN_FILENO, TCSADRAIN, &t);
 
     game game1;
+    game1.setGobNum(20);
     game1.readTerrainFile("maps/map2.txt");
     game1.play();
 

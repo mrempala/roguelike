@@ -7,14 +7,14 @@ std::map<char, tile> charToTile;
 game::game(){
     //Intialize random seed
     srand (time(NULL));
-    numGoblins = 10;
+    numGoblins = 0;
 }
 
 game::~game(){
     //Do nothing, no dynamic alloc
 }
 
-bool game::validMove(int x, int y){
+bool game::validMove(int x, int y)const{
     //Check screen boundaries
     if( x < 0 || x > CONSOLE_WIDTH)
         return false;
@@ -54,37 +54,8 @@ bool game::readTerrainFile(const char *fileName){
   }
 }
 
-
-void game::moveGoblinRandomly(goblin &aGoblin){
-    int randNum = rand() % 4;
-    switch(randNum){
-        //Left
-        case 0:
-            if(validMove(aGoblin.getX()-1, aGoblin.getY()))
-                aGoblin.setX(aGoblin.getX()-1);
-            break;
-            
-        //Right
-        case 1:
-            if(validMove(aGoblin.getX()+1, aGoblin.getY()))
-                aGoblin.setX(aGoblin.getX()+1);
-            break;
-        
-        //Up
-        case 2:
-            if(validMove(aGoblin.getX(), aGoblin.getY()-1))
-                aGoblin.setY(aGoblin.getY()-1);
-            break;
-        
-        //Down
-        case 3:
-            if(validMove(aGoblin.getX(), aGoblin.getY()+1))
-                aGoblin.setY(aGoblin.getY()+1);
-            break;
-    }
-}
-
 void game::spawnGoblins(){
+    //TODO: make sure goblins can't spawn on player
     int x, y;
     goblin temp;
     //Using goblinvec.size instead of 0 incase there are already goblins
@@ -129,7 +100,7 @@ void game::play(){
         }
         
         for(int i = 0; i<goblinVec.size(); i++){
-        moveGoblinRandomly(goblinVec[i]);
+        goblinVec[i].moveRandomly(this);
         }
         
         printGame();
@@ -165,9 +136,6 @@ game::play2(){
     
         std::cin>>input;
     }
-
-
-
 }*/
 
 
