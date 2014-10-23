@@ -1,59 +1,25 @@
+#ifndef GAME_H
+#define GAME_H
+
 #include <fstream>
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
 #include <vector>
+#include <map>
 #include <termios.h>
+#include "player.h"
 
-//Implement char to tile properties table
-struct tile {
-    bool playerPassable;
-    bool enemyPassable;
-    int hurtPlayer;
-};
-
-struct item {
-    char displayChar;
-    std::string name;
-    //Misc properties
-    int x;
-    int y;
-};
-
-class player {
-   public:
-      void setX(int a){x = a;}
-      void setY(int a){y = a;}
-      int getX(){return x;}
-      int getY(){return y;}
-      
-   private:
-      bool alive; //not used
-      int health; //not used
-      int x;
-      int y;
-};
-
-class goblin {
-   public:
-      void setX(int a){x = a;}
-      void setY(int a){y = a;}
-      int getX(){return x;}
-      int getY(){return y;}
-      //void moveRandomly();
-      
-   private:
-      int health; //not used
-      int x;
-      int y;
-};
+//Forward Declaration
+class player;
+class goblin;
 
 class game {
    public:
-      game(int gobNum = 20);
+      game();
       ~game();
-      bool readMapFile(char *mapFileName);
+      bool readTerrainFile(const char *mapFileName);
       void clearScreen();
       void printDeath();
       void printGame();
@@ -66,13 +32,13 @@ class game {
       void play();
    
    private:
-      char map[24][81];
+      friend class player;
+      char terrain[24][81];
       char printBuff[24][81];
       player player1;
       int numGoblins;
       std::vector<goblin> goblinVec;
+      //std::Vector<enemy> enemy 
 };
 
-
-
-
+#endif

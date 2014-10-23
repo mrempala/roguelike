@@ -1,30 +1,13 @@
 #include "game.h"
-
-//Global constants
-const int CONSOLE_HEIGHT = 24;
-const int CONSOLE_WIDTH  = 80;
-
-const char WALL    = '#';
-const char INVALID = '`';
-const char FLOOR   = '.';
-const char PLAYER  = '@';
-const char GOBLIN  = 'g';
-
-const char KB_LEFT = 'a';
-const char KB_RIGHT = 'd';
-const char KB_UP = 'w';
-const char KB_DOWN = 's';
-
+#include "goblin.h"
+#include "constants.h"
+std::map<char, tile> charToTile;
 
 //Class implementation
-game::game(int gobNum){
+game::game(){
     //Intialize random seed
     srand (time(NULL));
-            struct termios t;
-            tcgetattr(STDIN_FILENO, &t); //get the current terminal I/O structure
-            t.c_lflag &= ~ICANON; //Manipulate the flag bits to do what you want it to do
-            tcsetattr(STDIN_FILENO, TCSADRAIN, &t); //Apply the new settings
-    numGoblins = gobNum;
+    numGoblins = 10;
 }
 
 game::~game(){
@@ -40,28 +23,28 @@ bool game::validMove(int x, int y){
         return false;
         
     //Check for wall
-    else if(map[y][x] == WALL)
+    else if(terrain[y][x] == WALL)
         return false;
         
     else
         return true;
 }
 
-bool game::readMapFile(char *mapFileName){
+bool game::readTerrainFile(const char *fileName){
   //Sloppy and hacked together, will fix later
-  std::ifstream myfile (mapFileName);
+  std::ifstream myfile (fileName);
   std::string line;
   int i=0;
   if (myfile.is_open()){
     while ( std::getline (myfile, line) ){
       std::cout << line << '\n';
-      strcpy(map[i],line.c_str());
+      strcpy(terrain[i],line.c_str());
       int j = 0;
-      while(map[i][j]!='\0'){
-        if(map[i][j] == PLAYER){
+      while(terrain[i][j]!='\0'){
+        if(terrain[i][j] == PLAYER){
             player1.setX(j);
             player1.setY(i);
-            map[i][j] = FLOOR;
+            terrain[i][j] = FLOOR;
         }
         j++;
       }
@@ -108,13 +91,85 @@ void game::spawnGoblins(){
     for(int i = goblinVec.size(); goblinVec.size()<numGoblins; i++){
         x = rand() % CONSOLE_WIDTH;
         y = rand() % CONSOLE_HEIGHT;
-        if(map[y][x] == FLOOR){
+        if(terrain[y][x] == FLOOR){
             temp.setX(x);
             temp.setY(y);
             goblinVec.push_back(temp);
         }
     }
 }
+
+bool game::goblinCollison(){
+    for(int i = 0; i<goblinVec.size(); i++){
+        if(goblinVec[i].getX() == player1.getX() &&
+           goblinVec[i].getY() == player1.getY()){
+             return true;
+           }
+        }
+    return false;
+}
+
+void game::play(){
+    spawnGoblins();
+    printGame();
+    char input;
+    std::cin>>input;
+    while(input != 'q'){
+        player1.move(input, this);
+        
+        //Quick copy & paste here, felt wrong that a player
+        //and goblin could walk past each other
+        if(goblinCollison()){
+           clearScreen();
+           printDeath();
+           std::cout<<"You have been eaten by a grue :("<<std::endl;
+           std::cout<<"Don't go north next time, dummy"<<std::endl;
+           std::cout<<"http://xkcd.com/91/"<<std::endl<<std::endl<<std::endl<<std::endl<<std::endl;
+           break;
+        }
+        
+        for(int i = 0; i<goblinVec.size(); i++){
+        moveGoblinRandomly(goblinVec[i]);
+        }
+        
+        printGame();
+        
+        if(goblinCollison()){
+           clearScreen();
+           printDeath();
+           std::cout<<"You have been eaten by a grue :("<<std::endl;
+           std::cout<<"Don't go north next time, dummy"<<std::endl;
+           std::cout<<"http://xkcd.com/91/"<<std::endl<<std::endl<<std::endl<<std::endl<<std::endl;
+           break;
+       }
+        
+        std::cin>>input;
+    }
+    
+}
+
+
+
+/*
+game::play2(){
+    //Initalize Game
+    spawnGoblins();
+    printGame();
+    char input;
+    std::cin>>input;
+    
+    //Loop until player dies or quits
+    while(player1.isAlive() && input != 'Q'){
+        player.movePlayer(input);
+        
+    
+        std::cin>>input;
+    }
+
+
+
+}*/
+
 
 void game::clearScreen(){
     for(int i = 0; i < CONSOLE_HEIGHT; i++){
@@ -137,10 +192,9 @@ void game::printDeath(){
 
 void game::printGame(){
     //Copy map to printbuffer
-    //Probably not the most efficent way to do things
     for(int i = 0; i < CONSOLE_HEIGHT; i++)
         for(int j =0; j < CONSOLE_WIDTH + 1; j++)
-            printBuff[i][j] = map[i][j];
+            printBuff[i][j] = terrain[i][j];
     
     //Add goblins to printbuff
     for(int i = 0; i<goblinVec.size(); i++){
@@ -155,106 +209,6 @@ void game::printGame(){
         std::cout<<printBuff[i]<<std::endl;
     }
 }
-
-void game::movePlayer(char input){
-    switch(input){
-        case KB_LEFT:
-            if(validMove(player1.getX()-1, player1.getY()))
-                player1.setX(player1.getX() -1);
-            break;
-            
-        case KB_RIGHT:
-            if(validMove(player1.getX()+1, player1.getY()))
-                player1.setX(player1.getX() + 1);
-            break;
-        
-        case KB_UP:
-            if(validMove(player1.getX(), player1.getY()-1))
-                player1.setY(player1.getY() - 1);
-            break;
-        
-        case KB_DOWN:
-            if(validMove(player1.getX(), player1.getY()+1))
-                player1.setY(player1.getY() + 1);
-            break;
-        }
-}
-
-bool game::goblinCollison(){
-    for(int i = 0; i<goblinVec.size(); i++){
-        if(goblinVec[i].getX() == player1.getX() &&
-           goblinVec[i].getY() == player1.getY()){
-             return true;
-           }
-        }
-    return false;
-}
-
-void game::play(){
-    spawnGoblins();
-    printGame();
-    char input;
-    std::cin>>input;
-    while(input != 'q'){
-        movePlayer(input);
-        
-        //Quick copy & paste here, felt wrong that a player
-        //and goblin could walk past each other
-        if(goblinCollison()){
-           clearScreen();
-           printDeath();
-           std::cout<<"You have been eaten by a grue :("<<std::endl;
-           std::cout<<"Don't go north next time, dummy"<<std::endl;
-           std::cout<<"http://www.explainxkcd.com/wiki/index.php/91:_Pwned"<<std::endl<<std::endl<<std::endl<<std::endl<<std::endl;
-           break;
-        }
-        
-        for(int i = 0; i<goblinVec.size(); i++){
-        moveGoblinRandomly(goblinVec[i]);
-        }
-        
-        printGame();
-        
-        if(goblinCollison()){
-           clearScreen();
-           printDeath();
-           std::cout<<"You have been eaten by a grue :("<<std::endl;
-           std::cout<<"Don't go north next time, dummy"<<std::endl;
-           std::cout<<"http://www.explainxkcd.com/wiki/index.php/91:_Pwned"<<std::endl<<std::endl<<std::endl<<std::endl<<std::endl;
-           break;
-       }
-        
-        std::cin>>input;
-    }
-    
-}
-
-
-
-/*
-game::play2(){
-    //Initalize Game
-    spawnGoblins();
-    printGame();
-    char input;
-    std::cin>>input;
-    
-    //Loop until player dies or quits
-    while(player1.isAlive() && input != 'Q'){
-    
-    
-    
-        std::cin>>input;
-    }
-
-
-
-}*/
-
-
-
-
-
 
 
 
