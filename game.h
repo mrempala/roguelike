@@ -55,6 +55,7 @@ class game {
       ~game();
       bool readMapFile(char *mapFileName);
       void clearScreen();
+      void printDeath();
       void printGame();
       bool validMove(int x, int y);
       //bool isWall(int x, int y);

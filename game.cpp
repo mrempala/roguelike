@@ -120,7 +120,19 @@ void game::clearScreen(){
     for(int i = 0; i < CONSOLE_HEIGHT; i++){
         std::cout<<std::endl;
     }
+}
 
+void game::printDeath(){
+    std::cout<<" __      __                         _______   __                  __ "<<std::endl;
+    std::cout<<"/  \\    /  |                       /       \\ /  |                /  |"<<std::endl;
+    std::cout<<"$$  \\  /$$/______   __    __       $$$$$$$  |$$/   ______    ____$$ |"<<std::endl;
+    std::cout<<" $$  \\/$$//      \\ /  |  /  |      $$ |  $$ |/  | /      \\  /    $$ |"<<std::endl;
+    std::cout<<"  $$  $$//$$$$$$  |$$ |  $$ |      $$ |  $$ |$$ |/$$$$$$  |/$$$$$$$ |"<<std::endl;
+    std::cout<<"   $$$$/ $$ |  $$ |$$ |  $$ |      $$ |  $$ |$$ |$$    $$ |$$ |  $$ |"<<std::endl;
+    std::cout<<"    $$ | $$ \\__$$ |$$ \\__$$ |      $$ |__$$ |$$ |$$$$$$$$/ $$ \\__$$ |"<<std::endl;
+    std::cout<<"    $$ | $$    $$/ $$    $$/       $$    $$/ $$ |$$       |$$    $$ |"<<std::endl;
+    std::cout<<"    $$/   $$$$$$/   $$$$$$/        $$$$$$$/  $$/  $$$$$$$/  $$$$$$$/ "<<std::endl;
+    std::cout<<std::endl<<std::endl<<std::endl;
 }
 
 void game::printGame(){
@@ -190,6 +202,7 @@ void game::play(){
         //and goblin could walk past each other
         if(goblinCollison()){
            clearScreen();
+           printDeath();
            std::cout<<"You have been eaten by a grue :("<<std::endl;
            std::cout<<"Don't go north next time, dummy"<<std::endl;
            std::cout<<"http://www.explainxkcd.com/wiki/index.php/91:_Pwned"<<std::endl<<std::endl<<std::endl<<std::endl<<std::endl;
@@ -204,6 +217,7 @@ void game::play(){
         
         if(goblinCollison()){
            clearScreen();
+           printDeath();
            std::cout<<"You have been eaten by a grue :("<<std::endl;
            std::cout<<"Don't go north next time, dummy"<<std::endl;
            std::cout<<"http://www.explainxkcd.com/wiki/index.php/91:_Pwned"<<std::endl<<std::endl<<std::endl<<std::endl<<std::endl;
