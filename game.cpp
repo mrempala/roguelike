@@ -4,10 +4,11 @@
 const int CONSOLE_HEIGHT = 24;
 const int CONSOLE_WIDTH  = 80;
 
-const char WALL   = '#';
-const char FLOOR  = '.';
-const char PLAYER = '@';
-const char GOBLIN = 'g';
+const char WALL    = '#';
+const char INVALID = '`';
+const char FLOOR   = '.';
+const char PLAYER  = '@';
+const char GOBLIN  = 'g';
 
 const char KB_LEFT = 'a';
 const char KB_RIGHT = 'd';
@@ -19,6 +20,10 @@ const char KB_DOWN = 's';
 game::game(int gobNum){
     //Intialize random seed
     srand (time(NULL));
+            struct termios t;
+            tcgetattr(STDIN_FILENO, &t); //get the current terminal I/O structure
+            t.c_lflag &= ~ICANON; //Manipulate the flag bits to do what you want it to do
+            tcsetattr(STDIN_FILENO, TCSADRAIN, &t); //Apply the new settings
     numGoblins = gobNum;
 }
 
@@ -111,6 +116,13 @@ void game::spawnGoblins(){
     }
 }
 
+void game::clearScreen(){
+    for(int i = 0; i < CONSOLE_HEIGHT; i++){
+        std::cout<<std::endl;
+    }
+
+}
+
 void game::printGame(){
     //Copy map to printbuffer
     //Probably not the most efficent way to do things
@@ -171,15 +183,16 @@ void game::play(){
     printGame();
     char input;
     std::cin>>input;
-    while(input != 'Q'){
+    while(input != 'q'){
         movePlayer(input);
         
         //Quick copy & paste here, felt wrong that a player
         //and goblin could walk past each other
         if(goblinCollison()){
+           clearScreen();
            std::cout<<"You have been eaten by a grue :("<<std::endl;
            std::cout<<"Don't go north next time, dummy"<<std::endl;
-           std::cout<<"http://www.explainxkcd.com/wiki/index.php/91:_Pwned"<<std::endl;
+           std::cout<<"http://www.explainxkcd.com/wiki/index.php/91:_Pwned"<<std::endl<<std::endl<<std::endl<<std::endl<<std::endl;
            break;
         }
         
@@ -190,9 +203,10 @@ void game::play(){
         printGame();
         
         if(goblinCollison()){
+           clearScreen();
            std::cout<<"You have been eaten by a grue :("<<std::endl;
            std::cout<<"Don't go north next time, dummy"<<std::endl;
-           std::cout<<"http://www.explainxkcd.com/wiki/index.php/91:_Pwned"<<std::endl;
+           std::cout<<"http://www.explainxkcd.com/wiki/index.php/91:_Pwned"<<std::endl<<std::endl<<std::endl<<std::endl<<std::endl;
            break;
        }
         
@@ -200,6 +214,38 @@ void game::play(){
     }
     
 }
+
+
+
+/*
+game::play2(){
+    //Initalize Game
+    spawnGoblins();
+    printGame();
+    char input;
+    std::cin>>input;
+    
+    //Loop until player dies or quits
+    while(player1.isAlive() && input != 'Q'){
+    
+    
+    
+        std::cin>>input;
+    }
+
+
+
+}*/
+
+
+
+
+
+
+
+
+
+
 
 
 

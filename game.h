@@ -4,6 +4,22 @@
 #include <time.h>
 #include <string.h>
 #include <vector>
+#include <termios.h>
+
+//Implement char to tile properties table
+struct tile {
+    bool playerPassable;
+    bool enemyPassable;
+    int hurtPlayer;
+};
+
+struct item {
+    char displayChar;
+    std::string name;
+    //Misc properties
+    int x;
+    int y;
+};
 
 class player {
    public:
@@ -11,7 +27,6 @@ class player {
       void setY(int a){y = a;}
       int getX(){return x;}
       int getY(){return y;}
-      //void printPlayer();
       
    private:
       bool alive; //not used
@@ -39,6 +54,7 @@ class game {
       game(int gobNum = 20);
       ~game();
       bool readMapFile(char *mapFileName);
+      void clearScreen();
       void printGame();
       bool validMove(int x, int y);
       //bool isWall(int x, int y);
