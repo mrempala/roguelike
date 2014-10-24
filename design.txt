@@ -1,0 +1,22 @@
+Functionality:
+    Load/Create Map
+    Spawn Enemies
+    Move Player
+    Move Enemies
+    Kill Player (Enemy-Player Collision)
+    Print Game
+    
+
+Game data:
+    Map
+    Player
+    Enemies
+    Items
+    Doors
+    Misc
+    
+Game Data should be centralized in game
+
+There should be a seperation between logic and modification.
+
+
