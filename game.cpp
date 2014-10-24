@@ -75,7 +75,7 @@ void game::spawnGoblins(){
     }
 }
 
-bool game::goblinCollison(){
+bool game::goblinPlayerCollison(){
     for(int i = 0; i<goblinVec.size(); i++){
         if(goblinVec[i].getX() == player1.getX() &&
            goblinVec[i].getY() == player1.getY()){
@@ -95,7 +95,7 @@ void game::play(){
         
         //Quick copy & paste here, felt wrong that a player
         //and goblin could walk past each other
-        if(goblinCollison()){
+        if(goblinPlayerCollison()){
            clearScreen();
            printDeath();
            std::cout<<"You have been eaten by a grue :("<<std::endl;
@@ -110,7 +110,7 @@ void game::play(){
         
         printGame();
         
-        if(goblinCollison()){
+        if(goblinPlayerCollison()){
            clearScreen();
            printDeath();
            std::cout<<"You have been eaten by a grue :("<<std::endl;

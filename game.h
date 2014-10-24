@@ -20,7 +20,7 @@ class game {
       void printGame();
       bool validMove(int x, int y)const;
       //bool isWall(int x, int y);
-      bool goblinCollison();
+      bool goblinPlayerCollison();
       void play();
    
    private:
