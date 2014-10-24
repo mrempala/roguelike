@@ -61,14 +61,14 @@ bool game::readTerrainFile(const char *fileName){
 }
 
 void game::spawnGoblins(){
-    //TODO: make sure goblins can't spawn on player
     int x, y;
     goblin temp;
     //Using goblinvec.size instead of 0 incase there are already goblins
     for(int i = goblinVec.size(); goblinVec.size()<numGoblins; i++){
         x = rand() % CONSOLE_WIDTH;
         y = rand() % CONSOLE_HEIGHT;
-        if(terrain[y][x] == FLOOR){
+        if(terrain[y][x] == FLOOR || 
+        (x==player1->getX() && y==player1->getY())){
             temp.setX(x);
             temp.setY(y);
             goblinVec.push_back(temp);

@@ -23,7 +23,7 @@ class game {
       void play();
    
    private:
-      char terrain[24][81];
+      char terrain[24][81]; //make const? more work to read in from file
       char printBuff[24][81];
       player *player1;
       int numGoblins;
