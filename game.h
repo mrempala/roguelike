@@ -17,7 +17,6 @@ class game {
       void clearScreen();
       void printDeath();
       void printGame();
-      bool validMove(int x, int y)const;
       //bool isWall(int x, int y);
       bool goblinPlayerCollison();
       void play();
