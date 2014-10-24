@@ -20,22 +20,6 @@ game::~game(){
     delete player1;
 }
 
-bool game::validMove(int x, int y)const{
-    //Check screen boundaries
-    if( x < 0 || x > CONSOLE_WIDTH)
-        return false;
-    
-    else if( y < 0 || y > CONSOLE_HEIGHT)
-        return false;
-        
-    //Check for wall
-    else if(terrain[y][x] == WALL)
-        return false;
-        
-    else
-        return true;
-}
-
 bool game::readTerrainFile(const char *fileName){
   //Sloppy and hacked together, will fix later
   std::ifstream myfile (fileName);
@@ -67,7 +51,17 @@ void game::spawnGoblins(){
     for(int i = goblinVec.size(); goblinVec.size()<numGoblins; i++){
         x = rand() % CONSOLE_WIDTH;
         y = rand() % CONSOLE_HEIGHT;
-        if(terrain[y][x] == FLOOR && 
+        
+        bool goblinPresent = false;
+        for(int j = 0; j < goblinVec.size(); j++){
+            if (goblinVec[j].getX() == x && goblinVec[j].getY() == y ){
+                goblinPresent = true;
+                break;
+            }
+        }
+        
+        //Need to break this down for readability
+        if(terrain[y][x] == FLOOR && !goblinPresent &&
         !(x==player1->getX() && y==player1->getY())){
             temp.setX(x);
             temp.setY(y);

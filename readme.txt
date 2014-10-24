@@ -1,6 +1,5 @@
 Assumptions Made:
 The player is explicitly given in the map.txt file as an @.
-Goblins can somehow jump (and also spawn) on top of one another since they don't check for collision of each other. I may or may not fix this issue in the future.
 
 Todo:
 Dependency injection. Create another class to act as a delagate between game and other classes. Currently using const *game as a stop gap.

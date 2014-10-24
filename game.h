@@ -28,7 +28,8 @@ class game {
       player *player1;
       int numGoblins;
       std::vector<goblin> goblinVec;
-      friend class player;
+      friend class player;//temporary for now, will remove when using dependency injection
+      friend class goblin;
       //Idea: Add two seperate class that keep track of items
       //and enemies. Reports back if there is an enemy/item in that location.
 };
