@@ -1,6 +1,5 @@
 #include "goblin.h"
 #include "game.h"
-#include "constants.h"
 #include <stdlib.h>
 #include <time.h>
 
