@@ -13,10 +13,11 @@ game::game(){
     //Intialize random seed
     srand (time(NULL));
     numGoblins = 0;
+    player1 = new player;
 }
 
 game::~game(){
-    //Do nothing, no dynamic alloc
+    delete player1;
 }
 
 bool game::validMove(int x, int y)const{
@@ -47,8 +48,8 @@ bool game::readTerrainFile(const char *fileName){
       int j = 0;
       while(terrain[i][j]!='\0'){
         if(terrain[i][j] == PLAYER){
-            player1.setX(j);
-            player1.setY(i);
+            player1->setX(j);
+            player1->setY(i);
             terrain[i][j] = FLOOR;
         }
         j++;
@@ -77,8 +78,8 @@ void game::spawnGoblins(){
 
 bool game::goblinPlayerCollison(){
     for(int i = 0; i<goblinVec.size(); i++){
-        if(goblinVec[i].getX() == player1.getX() &&
-           goblinVec[i].getY() == player1.getY()){
+        if(goblinVec[i].getX() == player1->getX() &&
+           goblinVec[i].getY() == player1->getY()){
              return true;
            }
         }
@@ -91,7 +92,7 @@ void game::play(){
     char input;
     std::cin>>input;
     while(input != 'q'){
-        player1.move(input, this);
+        player1->move(input, this);
         
         //Quick copy & paste here, felt wrong that a player
         //and goblin could walk past each other
@@ -156,7 +157,7 @@ void game::printGame(){
     }
              
     //Add player to printbuff
-    printBuff[player1.getY()][player1.getX()] = PLAYER;
+    printBuff[player1->getY()][player1->getX()] = PLAYER;
 
     //Print to Screen
     for(int i = 0; i < CONSOLE_HEIGHT; i++){

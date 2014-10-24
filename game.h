@@ -2,7 +2,7 @@
 #define GAME_H
 
 #include <vector>
-#include "player.h"
+//#include "player.h"
 
 //Forward Declaration
 class player;
@@ -26,7 +26,7 @@ class game {
    private:
       char terrain[24][81];
       char printBuff[24][81];
-      player player1;
+      player *player1;
       int numGoblins;
       std::vector<goblin> goblinVec;
       friend class player;
