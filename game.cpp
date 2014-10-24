@@ -125,25 +125,6 @@ void game::play(){
 }
 
 
-
-/*
-game::play2(){
-    //Initalize Game
-    spawnGoblins();
-    printGame();
-    char input;
-    std::cin>>input;
-    
-    //Loop until player dies or quits
-    while(player1.isAlive() && input != 'Q'){
-        player.movePlayer(input);
-        
-    
-        std::cin>>input;
-    }
-}*/
-
-
 void game::clearScreen(){
     for(int i = 0; i < CONSOLE_HEIGHT; i++){
         std::cout<<std::endl;
