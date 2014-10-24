@@ -67,8 +67,8 @@ void game::spawnGoblins(){
     for(int i = goblinVec.size(); goblinVec.size()<numGoblins; i++){
         x = rand() % CONSOLE_WIDTH;
         y = rand() % CONSOLE_HEIGHT;
-        if(terrain[y][x] == FLOOR || 
-        (x==player1->getX() && y==player1->getY())){
+        if(terrain[y][x] == FLOOR && 
+        !(x==player1->getX() && y==player1->getY())){
             temp.setX(x);
             temp.setY(y);
             goblinVec.push_back(temp);
