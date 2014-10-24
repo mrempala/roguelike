@@ -12,7 +12,7 @@ const char KB_LEFT = 'a';
 const char KB_RIGHT = 'd';
 const char KB_UP = 'w';
 const char KB_DOWN = 's';
-
+/*
 struct tile {
     bool playerPassable;
     bool enemyPassable;
@@ -25,4 +25,4 @@ struct item {
     //Misc properties
     int x;
     int y;
-};
+};*/

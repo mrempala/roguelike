@@ -1,14 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <fstream>
-#include <iostream>
-#include <stdlib.h>
-#include <time.h>
-#include <string.h>
 #include <vector>
-#include <map>
-#include <termios.h>
 #include "player.h"
 
 //Forward Declaration
@@ -31,13 +24,13 @@ class game {
       void play();
    
    private:
-      friend class player;
       char terrain[24][81];
       char printBuff[24][81];
       player player1;
       int numGoblins;
       std::vector<goblin> goblinVec;
-      //Idea: Keep two seperate class that keeps track of items
+      friend class player;
+      //Idea: Add two seperate class that keep track of items
       //and enemies. Reports back if there is an enemy/item in that location.
 };
 
