@@ -15,6 +15,8 @@ class goblin {
       int getY()const{return y;}
       
    private:
+      //V: take it out for now, since it can so easily be added it once we do decide to have
+      //health
       int health; //not used
       int x;
       int y;

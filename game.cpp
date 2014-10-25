@@ -10,10 +10,11 @@
 
 //Class implementation
 game::game(){
+    //V: prefer not seeding with time, do something more deterministic
     //Intialize random seed
     srand (time(NULL));
     numGoblins = 0;
-    player1 = new player;
+    player1 = new player; //V: its unusual to see without (), best put those in.
 }
 
 game::~game(){
@@ -44,6 +45,7 @@ bool game::readTerrainFile(const char *fileName){
   }
 }
 
+//V: quiz question: what are all the inputs, hidden and otherwise, to this function?
 void game::spawnGoblins(){
     int x, y;
     goblin temp;
@@ -61,11 +63,12 @@ void game::spawnGoblins(){
         }
         
         //Need to break this down for readability
+        //V: agreed. two more boolean variables should be good.
         if(terrain[y][x] == FLOOR && !goblinPresent &&
         !(x==player1->getX() && y==player1->getY())){
             temp.setX(x);
             temp.setY(y);
-            goblinVec.push_back(temp);
+            goblinVec.push_back(temp); //V: hope youre aware of the copy going on here
         }
     }
 }
@@ -114,6 +117,7 @@ void game::play(){
            break;
        }
         
+        //V: This should happen once, not twice. ask me for the better way
         std::cin>>input;
     }
     
@@ -127,6 +131,7 @@ void game::clearScreen(){
 }
 
 void game::printDeath(){
+    //V: LOL NICE
     std::cout<<" __      __                         _______   __                  __ "<<std::endl;
     std::cout<<"/  \\    /  |                       /       \\ /  |                /  |"<<std::endl;
     std::cout<<"$$  \\  /$$/______   __    __       $$$$$$$  |$$/   ______    ____$$ |"<<std::endl;
