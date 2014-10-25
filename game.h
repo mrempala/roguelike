@@ -36,7 +36,7 @@ class game {
       //since it's extra state that's unneeded after that stage. Perhaps make it const or
       //pass it in through parameters
       int numGoblins;
-      std::vector<goblin> goblinVec;  //V: i prefer pointers here, so we dont run into trouble when deleting one goblin (thus changing the addresses of the rest of the goblins)
+      std::vector<goblin> goblinVec;
       friend class player;//temporary for now, will remove when using dependency injection
       friend class goblin;
       //Idea: Add two seperate class that keep track of items
