@@ -1,22 +1,77 @@
-Functionality:
-    Load/Create Map
+Current Functionality:
+    Load Map
     Spawn Enemies
     Move Player
     Move Enemies
-    Kill Player (Enemy-Player Collision)
+    Kill Player (Goblin-Player Collision)
     Print Game
     
 
-Game data:
+Current Game data:
     Map
     Player
-    Enemies
-    Items
-    Doors
-    Misc
+    Goblins
     
-Game Data should be centralized in game
+Game Data should be centralized in game class
 
-There should be a seperation between logic and modification.
-
-
+There should be a seperation between logic and modification
+    
+    
+    
+Possible Future Functionality:
+    Player
+        Player Attack
+        Player Ranged Attack
+        Inventory
+        Gain XP
+        Gain Skills
+        Magic
+        Player creation
+    Items
+        Spawn Items on Map
+        Readin items from Map file
+        Pick up Items
+        Use Items
+        Enemy drop Items
+    Enemies
+        Different Enemies
+        Enemy Ranged Attack
+        Enemy Inventory?
+        Smart-ish AI
+    Map
+        Generate Random Map
+        Keys/Doors
+        Load Next Dungeon/Map segment
+        Vissability
+        Look around/Inspect
+    Change Difficulty
+        Player Start Health
+        Player Damage
+        Enemy Health
+        Enemy Damage
+        Number of enemies
+        Item Drop Rate
+    Save/Load (Not very roguelike)
+    NPC's / Market System
+        Buy Items
+        Sell Items
+        Craft Items
+    Mission/Side Quest System
+    Action Description
+        Ex: "You Killed a Goblin. You gained 10 XP!"
+            "The Goblin Attacked you. You lost 5 HP!"
+            "You Enter a dark dungeon."
+            "You picked up an arrow!"
+    Tutorial/In-game Manual
+        
+Future Data:
+    Player Inventory
+    Player Stats
+    Enemy Type
+    Item data
+    NPC Dialogue
+    Lore/Story
+    
+    
+    
+        
