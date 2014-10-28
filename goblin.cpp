@@ -4,6 +4,7 @@
 #include <time.h>
 #include "constants.h"
 
+//I feel like this function can be a function inside the class that both player and goblin use.
 bool goblin::validMove(int x, int y, const game* mainGame){
     //Not happy with this, when I convert to use independency injection
     //This will be different.
@@ -25,6 +26,7 @@ bool goblin::validMove(int x, int y, const game* mainGame){
     else
         return true;
 }
+
 
 void goblin::moveRandomly(const game *mainGame){
     int randNum = rand() % 4;

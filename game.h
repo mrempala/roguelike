@@ -7,6 +7,10 @@
 class player;
 class goblin;
 
+//Some design things, the print is cool with the buffer. after talking to bandith, its pretty apparent to me that
+//One of the better methods is to make a render object that the game spits out that another class can read
+//based on the class that reads it, it will be rendered differently.
+
 class game {
    public:
       game();
