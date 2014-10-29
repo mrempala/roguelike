@@ -3,6 +3,7 @@
 
 class game;
 
+//V: turns out, this is similar to goblin, so lets explore whether we should combine them.
 class player {
    public:
       //L: DUDE WE NEED CONTRUCTORS MAN, Initialize your shit.
@@ -12,8 +13,9 @@ class player {
       int getX(){return x;}
       int getY(){return y;}
       bool isAlive(); //L: unimplemented
+      //V: should be const
       
-      bool validMove(int x, int y, const game *mainGame); 
+      bool validMove(int x, int y, const game *mainGame); //V: should be const
       void move(char input, const game *mainGame);
       
    private:

@@ -11,9 +11,10 @@
 //Class implementation
 game::game(){
     //Intialize random seed
+    //V: prefer not seeding with time, do something more deterministic
     srand (time(NULL)); //L: srand time null is bad for testing
     numGoblins = 0;
-    player1 = new player;
+    player1 = new player; //V: its unusual to see without (), best put those in.
 }
 
 game::~game(){
@@ -78,7 +79,7 @@ void game::spawnGoblins(){
         !(x==player1->getX() && y==player1->getY())){
             temp.setX(x);
             temp.setY(y);
-            goblinVec.push_back(temp);
+            goblinVec.push_back(temp); //V: hope youre aware of the copy going on here
         }
     }
 }
@@ -131,7 +132,7 @@ void game::play(){
            break;
        }
         
-        std::cin>>input;
+        std::cin>>input; //V: This should happen once, not twice. ask me for the better way
     }
     
 }
