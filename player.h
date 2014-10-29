@@ -7,19 +7,19 @@ class player {
    public:
       //DUDE WE NEED CONTRUCTORS MAN, Initialize your shit.
       void setX(int a){x = a;} 
-         //Why are these setters necessary. shouldn't only the player class have access to changing where the player is going?
+         //L: Why are these setters necessary. shouldn't only the player class have access to changing where the player is going?
       void setY(int a){y = a;}
       int getX(){return x;}
       int getY(){return y;}
-      bool isAlive(); //unimplemented
+      bool isAlive(); //L: unimplemented
       
       bool validMove(int x, int y, const game *mainGame); 
       void move(char input, const game *mainGame);
       
    private:
       int health; //not used
-      int x; //bad variable name
-      int y; //bad variable name
+      int x; //L: bad variable name
+      int y; //L: bad variable name
 };
 
 #endif

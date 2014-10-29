@@ -18,8 +18,8 @@ class goblin {
       
    private:
       int health; //not used
-      int x; //bad variable name
-      int y; //bad variable name
+      int x; //L: bad variable name
+      int y; //L: bad variable name
 };
 
 #endif

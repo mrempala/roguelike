@@ -2,6 +2,9 @@
 #include "game.h"
 #include "constants.h"
 
+//V: this code is repeated between the player and the goblin, lets talk about different ways
+//to combine them
+
 bool player::validMove(int x, int y, const game *mainGame){
     //Check screen boundaries
     if( x < 0 || x > CONSOLE_WIDTH)
