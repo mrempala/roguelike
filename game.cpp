@@ -11,7 +11,7 @@
 //Class implementation
 game::game(){
     //Intialize random seed
-    srand (time(NULL)); //srand time null is bad for testing
+    srand (time(NULL)); //L: srand time null is bad for testing
     numGoblins = 0;
     player1 = new player;
 }
@@ -168,7 +168,7 @@ void game::printGame(){
     }
              
     //Add player to printbuff
-    printBuff[player1->getY()][player1->getX()] = PLAYER; //print buffer doesnt have to be global if it only used in print
+    printBuff[player1->getY()][player1->getX()] = PLAYER; //L: print buffer doesnt have to be global if it only used in print
 
     //Print to Screen
     for(int i = 0; i < CONSOLE_HEIGHT; i++){
