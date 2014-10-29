@@ -11,7 +11,7 @@ int main(int argc,char *argv[]){
 
     game game1;
     game1.setGobNum(20); //L: ah so this is why, why not pass 20 into the play function, then use that parameter to pass into the spawn goblins function.
-    //OMG dawg, readTerrain returns a bool. use that to check if it is loaded!
+    //L: OMG dawg, readTerrain returns a bool. use that to check if it is loaded!
     game1.readTerrainFile("maps/map2.txt");
     game1.play();
 
